@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "../axios";
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Container, Alert, Card } from "react-bootstrap";
+import '../css/Login.css'
 
 const Login = ({ setUser,onLogin }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -36,14 +38,40 @@ const Login = ({ setUser,onLogin }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-        <button type="submit">Login</button>
-      </form>
+    <div className="loginpage">
+     <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <Card style={{ width: "25rem", padding: "20px" }}>
+        <h2 className="text-center">Login</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="w-100">
+            Login
+          </Button>
+        </Form>
+      </Card>
+    </Container>
     </div>
   );
 };

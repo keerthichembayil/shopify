@@ -14,7 +14,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// evide token ie new user login cheyumbolum cart update cheyumbolum cart state update avanam 
+// evide token ie new when user login cheyumbolum cart update cheyumbolum cart state update avanam 
 // aa cart state localStorage set avanam and so useEffect token change avumbol ie user login
 // cheyumbol and calling fetch cart when cart change
 
@@ -26,9 +26,11 @@ const App = () => {
   // addto cart work avum ath venda
   console.log("user",user);
   console.log("token",token);
+ 
   const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cart")) || [];
   });
+  console.log(cart);
 
  
 
@@ -59,6 +61,7 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log("called first token useeffct");
     if (!token) {
       setCart([]);  // Ensure cart is empty if user is not logged in allenkil user login cheythilenkilum
       // cart count kanikum appol sync avilla
@@ -98,6 +101,7 @@ const App = () => {
 
   const fetchCart = async () => {
     const token = localStorage.getItem("token");
+    console.log("called fetchcart");
     if (!token) {
       setCart([]);
       setCartCount(0);
@@ -149,7 +153,7 @@ useEffect(() => {
       const totalQuantity = res.data.items.reduce((sum, item) => sum + item.quantity, 0);
       setCartCount(totalQuantity);
       localStorage.setItem("cart", JSON.stringify(res.data));
-     
+      fetchCart();
       alert("item added to cart");
       
     } catch (err) {
@@ -182,7 +186,9 @@ useEffect(() => {
         const totalQuantity = res.data.items.reduce((sum, item) => sum + item.quantity, 0);
     setCartCount(totalQuantity);
     localStorage.setItem("cart", JSON.stringify(res.data));
-    localStorage.setItem("cartCount", JSON.stringify(totalQuantity));
+    
+    // localStorage.setItem("cartCount", JSON.stringify(totalQuantity));
+    fetchCart();
       })
       .catch((err) => console.log(err));
   };

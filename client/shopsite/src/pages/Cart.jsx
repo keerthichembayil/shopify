@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import '../css/Cart.css'
 
 const Cart = ({ cart, removeFromCart }) => {
-  // Calculate total price using nested price inside productId
-  //evide the thing i understood is that when we pass props the component rerenders so no need 
-  // of sepearate useEffect when removeFromCart
-  const totalPrice = cart.items.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
-  // const totalPrice = cart?.items?.reduce((acc, item) => acc + item.productId.price * item.quantity, 0) || 0;
-
   console.log("cart",cart);
+  
+  // const totalPrice = cart.items.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
+  const totalPrice = cart?.items?.reduce((acc, item) => acc + item.productId.price * item.quantity, 0) || 0;
+
+ 
 console.log(totalPrice);
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 cartpage">
       <h2>Your Cart</h2>
       {cart?.items.length === 0 ? (
         <p>Your cart is empty. <Link to="/">Shop now</Link></p>

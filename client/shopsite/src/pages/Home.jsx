@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import '../css/Home.css'
 
 const Home = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
@@ -18,7 +20,7 @@ const Home = ({ addToCart }) => {
   
 
   return (
-    <div>
+    <div className="homepage">
       <h2>Products</h2>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
         {products.map((product) => (

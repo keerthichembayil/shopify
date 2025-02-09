@@ -7,8 +7,9 @@ exports.addToCart = async (req, res) => {
       cart = new Cart({ userId: req.user.id, items: [] });
     }
     // here it mention the item so the item in the model that is given in the body so productid and quantity
+    //do not forget console will block server exectuion so avoid console before ruunig whole project
     let existingItem = cart.items.find(item => item.productId.toString() === req.body.productId);
-    console.log("Received productId:", req.body.productId);
+   
     if (existingItem) {
       existingItem.quantity += 1;
     } else {

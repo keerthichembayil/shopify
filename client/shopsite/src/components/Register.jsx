@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "../axios";
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Container, Alert, Card } from "react-bootstrap";
+import '../css/Register.css'
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: "", email: "", password: "" });
@@ -24,36 +26,53 @@ const Register = () => {
   };
 
   return (
-    <div>
-    <h2>Register</h2>
-    {error && <p style={{ color: "red" }}>{error}</p>}
-    <form onSubmit={handleSubmit}>
-      <input 
-        type="text" 
-        name="username" 
-        placeholder="UserName" 
-        value={formData.username} 
-        onChange={handleChange} 
-        required 
-      />
-      <input 
-        type="email" 
-        name="email" 
-        placeholder="Email" 
-        value={formData.email} 
-        onChange={handleChange} 
-        required 
-      />
-      <input 
-        type="password" 
-        name="password" 
-        placeholder="Password" 
-        value={formData.password} 
-        onChange={handleChange} 
-        required 
-      />
-      <button type="submit">Register</button>
-    </form>
+    <div className="register">
+    <Container className="d-flex justify-content-center align-items-center min-vh-100">
+      <Card style={{ width: "400px", padding: "20px" }}>
+        <Card.Body>
+          <h2 className="text-center mb-4">Register</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" className="w-100">
+              Register
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
+    </Container>
   </div>
   );
 };
